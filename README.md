@@ -4,9 +4,8 @@ Baobab Model layer for Cerebral
 ## WARNING!
 This package uses the DEV version of Baboab V2, which will soon be released.
 
-
-## More info on Cerebral and video introduction
-Cerebral main repo is located [here](https://github.com/christianalfoni/cerebral) and a video demonstration can be found [here](https://www.youtube.com/watch?v=xCIv4-Q2dtA).
+## The Cerebral Webpage is now launched
+You can access the webpage at [http://christianalfoni.com/cerebral/](http://christianalfoni.com/cerebral/)
 
 ## Debugger
 You can download the Chrome debugger [here](https://chrome.google.com/webstore/detail/cerebral-debugger/ddefoknoniaeoikpgneklcbjlipfedbb?hl=no).
