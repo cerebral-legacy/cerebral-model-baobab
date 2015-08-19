@@ -22,7 +22,7 @@ module.exports = function (initialState, options) {
 
   return function (controller) {
 
-    var tree = Baobab(initialState, options);
+    var tree = new Baobab(initialState, options);
     initialState = tree.get();
 
     controller.on('reset', function () {
