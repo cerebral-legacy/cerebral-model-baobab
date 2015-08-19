@@ -2,7 +2,7 @@
 Baobab Model layer for Cerebral
 
 ## WARNING!
-This package uses the DEV version of Baboab V2, which will soon be released.
+This package uses the DEV (2.0.0-rc1) version of Baboab V2, which will soon be released.
 
 ## The Cerebral Webpage is now launched
 You can access the webpage at [http://christianalfoni.com/cerebral/](http://christianalfoni.com/cerebral/)
