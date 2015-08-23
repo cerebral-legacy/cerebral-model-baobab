@@ -37,6 +37,9 @@ module.exports = function (initialState, options) {
         get: function (path) {
           return tree.get(path);
         },
+        toJSON: function () {
+          return tree.toJSON();
+        },
         getRecordingState: function () {
           // Not available yet
         },

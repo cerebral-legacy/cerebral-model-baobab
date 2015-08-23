@@ -33,15 +33,13 @@ const model = Model({
   error: null
 }, options);
 
-// Any default input you want each action to receive
-const defaultInput = {
-  utils: {
-    request: request
-  }
+// Any utils you want each action to receive
+const services = {
+  request: request
 };
 
 // Instantiate the controller
-export default Controller(model, defaultInput);
+export default Controller(model, services);
 ```
 With Baobab you can also map state using facets, read more about that [here](https://github.com/Yomguithereal/baobab/issues/278).
 
