@@ -18,7 +18,6 @@ var updateTree = function (tree, state, path) {
 module.exports = function (initialState, options) {
 
   options = options || {};
-  options.syncwrite = true;
 
   return function (controller) {
 
