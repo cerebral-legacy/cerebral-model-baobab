@@ -32,6 +32,11 @@ const model = Model({
   error: null
 }, options);
 
+// You have access to the Baobab tree itself
+model.tree.on('invalid', function () {
+  
+});
+
 // Any utils you want each action to receive
 const services = {
   request: request

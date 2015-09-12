@@ -33,6 +33,7 @@ module.exports = function (initialState, options) {
     });
 
     return {
+        tree: tree,
         get: function (path) {
           return tree.get(path);
         },
