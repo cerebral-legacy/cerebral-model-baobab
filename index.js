@@ -5,9 +5,9 @@ var Model = function (initialState, options) {
 
   options = options || {};
 
-  return function (controller) {
+  var tree = new Baobab(initialState, options);
 
-    var tree = new Baobab(initialState, options);
+  var model = function (controller) {
 
     controller.on('reset', function () {
       tree.set(initialState);
@@ -73,6 +73,10 @@ var Model = function (initialState, options) {
     };
 
   };
+
+  model.tree = tree;
+
+  return model;
 
 };
 
