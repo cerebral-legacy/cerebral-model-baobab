@@ -1,35 +1,21 @@
 var Baobab = require('baobab');
+var deepmerge = require('deepmerge');
 
-var updateTree = function (tree, state, path) {
-  Object.keys(state).forEach(function (key) {
-    if (key[0] === '$') {
-      return;
-    }
-    path.push(key);
-    if (!Array.isArray(state[key]) && typeof state[key] === 'object' && state[key] !== null) {
-      updateTree(tree, state[key], path)
-    } else {
-      tree.set(path, state[key])
-    }
-    path.pop();
-  });
-};
-
-module.exports = function (initialState, options) {
+var Model = function (initialState, options) {
 
   options = options || {};
 
   return function (controller) {
 
     var tree = new Baobab(initialState, options);
-    initialState = tree.get();
 
     controller.on('reset', function () {
-      updateTree(tree, initialState, []);
+      tree.set(initialState);
     });
 
     controller.on('seek', function (seek, isPlaying, recording) {
-      // Not available yet
+      var newState = deepmerge(initialState, recording.initialState);
+      tree.set(newState);
     });
 
     return {
@@ -40,8 +26,12 @@ module.exports = function (initialState, options) {
         toJSON: function () {
           return tree.toJSON();
         },
-        getRecordingState: function () {
-          // Not available yet
+        export: function () {
+          return tree.serialize();
+        },
+        import: function (newState) {
+          var newState = deepmerge(initialState, newState);
+          tree.set(newState);
         },
         mutators: {
           set: function (path, value) {
@@ -85,3 +75,7 @@ module.exports = function (initialState, options) {
   };
 
 };
+
+Model.monkey = Baobab.monkey;
+
+module.exports = Model;
