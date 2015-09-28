@@ -20,8 +20,13 @@ var Model = function (initialState, options) {
 
     return {
         tree: tree,
-        get: function (path) {
-          return tree.get(path);
+        accessors: {
+          get: function (path) {
+            return tree.get(path);
+          },
+          serialize: function (path) {
+            return tree.serialize(path);
+          }
         },
         toJSON: function () {
           return tree.toJSON();
