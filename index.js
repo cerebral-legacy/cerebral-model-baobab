@@ -48,7 +48,7 @@ var Model = function (initialState, options) {
             return tree.splice.call(tree, args.shift(), args);
           },
           merge: function (path, value) {
-            tree.merge(path, value);
+            return tree.merge(path, value);
           },
           concat: function () {
             return tree.apply(path, function (existingValue) {
