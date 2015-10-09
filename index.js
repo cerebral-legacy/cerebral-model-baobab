@@ -20,25 +20,44 @@ var Model = function (initialState, options) {
 
     return {
         tree: tree,
-        get: function (path) {
-          return tree.get(path);
-        },
-        toJSON: function () {
-          return tree.toJSON();
-        },
-        export: function () {
-          return tree.serialize();
-        },
-        import: function (newState) {
-          var newState = deepmerge(initialState, newState);
-          tree.set(newState);
+        accessors: {
+          get: function (path) {
+            return tree.get(path);
+          },
+          toJSON: function () {
+            return tree.toJSON();
+          },
+          export: function () {
+            return tree.serialize();
+          },
+          import: function (newState) {
+            var newState = deepmerge(initialState, newState);
+            tree.set(newState);
+          },
+          keys: function (path) {
+            return Object.keys(tree.get(path));
+          },
+          findWhere: function (path, obj) {
+            var keysCount = Object.keys(obj).length;
+            return tree.get(path).filter(function (item) {
+              return Object.keys(item).filter(function (key) {
+                return key in obj && obj[key] === item[key];
+              }).length === keysCount;
+            }).pop();
+          }
         },
         mutators: {
           set: function (path, value) {
             tree.set(path, value);
           },
-          unset: function (path) {
-            tree.unset(path);
+          unset: function (path, keys) {
+            if (keys) {
+              keys.forEach(function (key) {
+                tree.unset(path.concat(key));
+              })
+            } else {
+              tree.unset(path);
+            }
           },
           push: function (path, value) {
             tree.push(path, value);
