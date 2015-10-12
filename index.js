@@ -86,7 +86,7 @@ var Model = function (initialState, options) {
             tree.unshift(path, value);
           },
           import: function (newState) {
-            var newState = deepmerge(initialState, newState);
+            newState = deepmerge(initialState, newState);
             tree.set(newState);
           }
         }
