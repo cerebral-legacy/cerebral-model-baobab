@@ -27,12 +27,8 @@ var Model = function (initialState, options) {
           toJSON: function () {
             return tree.toJSON();
           },
-          export: function () {
-            return tree.serialize();
-          },
-          import: function (newState) {
-            var newState = deepmerge(initialState, newState);
-            tree.set(newState);
+          export: function (path) {
+            return tree.serialize(path);
           },
           keys: function (path) {
             return Object.keys(tree.get(path));
@@ -69,7 +65,7 @@ var Model = function (initialState, options) {
           merge: function (path, value) {
             tree.merge(path, value);
           },
-          concat: function () {
+          concat: function (path, value) {
             tree.apply(path, function (existingValue) {
               return existingValue.concat(value);
             });
@@ -88,6 +84,10 @@ var Model = function (initialState, options) {
           },
           unshift: function (path, value) {
             tree.unshift(path, value);
+          },
+          import: function (newState) {
+            var newState = deepmerge(initialState, newState);
+            tree.set(newState);
           }
         }
     };
