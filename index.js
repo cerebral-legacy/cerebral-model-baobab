@@ -13,7 +13,7 @@ var Model = function (initialState, options) {
       tree.set(initialState);
     });
 
-    controller.on('seek', function (seek, isPlaying, recording) {
+    controller.on('seek', function (seek, recording) {
       var newState = deepmerge(initialState, recording.initialState);
       tree.set(newState);
     });
