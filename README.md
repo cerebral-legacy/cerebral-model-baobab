@@ -12,6 +12,7 @@ You can download the Chrome debugger [here](https://chrome.google.com/webstore/d
 
 ### Instantiate a Cerebral controller
 *controller.js*
+
 ```js
 import Controller from 'cerebral';
 import Model from 'cerebral-baobab';
@@ -31,7 +32,7 @@ const model = Model({
 
 // You have access to the Baobab tree itself
 model.tree.on('invalid', function () {
-  
+
 });
 
 // Any utils you want each action to receive
@@ -42,6 +43,7 @@ const services = {
 // Instantiate the controller
 export default Controller(model, services);
 ```
+
 With Baobab you can also map state using facets, read more about that [here](https://github.com/Yomguithereal/baobab/issues/278).
 
 ### Creating signals
@@ -50,6 +52,7 @@ Creating actions are generic. It works the same way across all packages. You can
 Typically you would create your signals in the *main.js* file, but you can split them out as you see fit.
 
 *main.js*
+
 ```js
 import controller from './controller.js';
 
@@ -65,6 +68,7 @@ controller.signal('formSubmitted', setLoading, [saveForm], unsetLoading);
 You can manually listen to changes on the controller, in case you want to explore [reactive-router](https://github.com/christianalfoni/reactive-router) for example.
 
 *main.js*
+
 ```js
 import controller from './controller.js';
 
@@ -83,6 +87,7 @@ controller.removeListener('remember', onChange);
 You can listen to errors in the controller. Now, Cerebral helps you a lot to avoid errors, but there are probably scenarios you did not consider. By using the error event you can indicate messages to the user and pass these detailed error messages to a backend service. This lets you quickly fix bugs in production.
 
 *main.js*
+
 ```js
 ...
 const onError = function (error) {
