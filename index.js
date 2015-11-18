@@ -1,5 +1,5 @@
 var Baobab = require('baobab');
-var deepmerge = require('deepmerge');
+var deepmerge = require('./deepmerge');
 
 var Model = function (initialState, options) {
 
@@ -19,7 +19,7 @@ var Model = function (initialState, options) {
       while (path.length) {
         state[path.shift()] = path.length === 0 ? recording.initialState : {};
       }
-      var newState = deepmerge(tree.get(), state);
+      var newState = deepmerge(initialState, state);
       tree.set(newState);
     });
 
