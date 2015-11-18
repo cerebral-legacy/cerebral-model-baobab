@@ -1,5 +1,5 @@
 var Baobab = require('baobab');
-var deepmerge = require('./deepmerge');
+var deepmerge = require('./deepmerge.js');
 
 var Model = function (initialState, options) {
 
