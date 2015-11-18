@@ -1,5 +1,40 @@
 var Baobab = require('baobab');
-var deepmerge = require('./deepmerge.js');
+function deepmerge(target, src) {
+   var array = Array.isArray(src);
+   var dst = array && [] || {};
+
+   if (array) {
+       target = target || [];
+       dst = src.slice();
+       src.forEach(function(e, i) {
+           if (typeof dst[i] === 'undefined') {
+               dst[i] = e;
+           } else if (typeof e === 'object') {
+               dst[i] = deepmerge(target[i], e);
+           }
+       });
+   } else {
+       if (target && typeof target === 'object') {
+           Object.keys(target).forEach(function (key) {
+               dst[key] = target[key];
+           })
+       }
+       Object.keys(src).forEach(function (key) {
+           if (typeof src[key] !== 'object' || !src[key]) {
+               dst[key] = src[key];
+           }
+           else {
+               if (!target[key]) {
+                   dst[key] = src[key];
+               } else {
+                   dst[key] = deepmerge(target[key], src[key]);
+               }
+           }
+       });
+   }
+
+   return dst;
+};
 
 var Model = function (initialState, options) {
 
@@ -19,7 +54,7 @@ var Model = function (initialState, options) {
       while (path.length) {
         state[path.shift()] = path.length === 0 ? recording.initialState : {};
       }
-      var newState = deepmerge(initialState, state);
+      var newState = deepmerge(tree.get(), state);
       tree.set(newState);
     });
 
