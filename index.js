@@ -67,12 +67,8 @@ var Model = function (initialState, options) {
           toJSON: function () {
             return tree.toJSON();
           },
-          export: function () {
-            return tree.serialize();
-          },
-          import: function (newState) {
-            var newState = deepmerge(initialState, newState);
-            tree.set(newState);
+          export: function (path) {
+            return tree.serialize(path);
           },
           keys: function (path) {
             return Object.keys(tree.get(path));
@@ -128,6 +124,10 @@ var Model = function (initialState, options) {
           },
           unshift: function (path, value) {
             tree.unshift(path, value);
+          },
+          import: function (newState) {
+            newState = deepmerge(initialState, newState);
+            tree.set(newState);
           }
         }
     };
