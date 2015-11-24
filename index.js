@@ -109,7 +109,7 @@ var Model = function (initialState, options) {
           merge: function (path, value) {
             tree.merge(path, value);
           },
-          concat: function () {
+          concat: function (path, value) {
             tree.apply(path, function (existingValue) {
               return existingValue.concat(value);
             });
