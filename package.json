@@ -1,6 +1,6 @@
 {
   "name": "cerebral-baobab",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Baobab Model layer for Cerebral",
   "main": "index.js",
   "scripts": {
