@@ -73,10 +73,6 @@ var Model = function (initialState, options) {
           export: function () {
             return tree.serialize();
           },
-          import: function (newState) {
-            var newState = deepmerge(initialState, newState);
-            tree.set(newState);
-          },
           keys: function (path) {
             return Object.keys(tree.get(path));
           },
@@ -92,6 +88,10 @@ var Model = function (initialState, options) {
         mutators: {
           set: function (path, value) {
             tree.set(path, value);
+          },
+          import: function (newState) {
+            var newState = deepmerge(initialState, newState);
+            tree.set(newState);
           },
           unset: function (path, keys) {
             if (keys) {
@@ -119,14 +119,16 @@ var Model = function (initialState, options) {
           },
           pop: function (path) {
             tree.apply(path, function (existingValue) {
-              existingValue.pop();
-              return existingValue;
+              var copy = existingValue.slice();
+              copy.pop();
+              return copy;
             });
           },
           shift: function (path) {
             tree.apply(path, function (existingValue) {
-              existingValue.shift();
-              return existingValue;
+              var copy = existingValue.slice();
+              copy.shift();
+              return copy;
             });
           },
           unshift: function (path, value) {
@@ -144,5 +146,6 @@ var Model = function (initialState, options) {
 };
 
 Model.monkey = Baobab.monkey;
+Model.dynamicNode = Baobab.dynamicNode;
 
 module.exports = Model;
