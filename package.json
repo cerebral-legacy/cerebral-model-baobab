@@ -1,6 +1,6 @@
 {
   "name": "cerebral-baobab",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Baobab Model layer for Cerebral",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "url": "https://github.com/christianalfoni/cerebral-baobab/issues"
   },
   "homepage": "https://github.com/christianalfoni/cerebral-baobab#readme",
-  "peerDependencies": {
-    "baobab": "^2.0.0"
+  "dependencies": {
+    "baobab": "^2.2.1"
   }
 }
