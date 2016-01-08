@@ -49,17 +49,16 @@ var Model = function (initialState, options) {
     });
 
     controller.on('seek', function (seek, recording) {
-      var path = (recording.path || []).slice();
-      var state = {};
-      while (path.length) {
-        state[path.shift()] = path.length === 0 ? recording.initialState : {};
-      }
-      var newState = deepmerge(tree.get(), state);
-      tree.set(newState);
+      recording.initialState.forEach(function (state) {
+        tree.set(state.path, state.value);
+      });
     });
 
     return {
         tree: tree,
+        logModel: function () {
+          return tree.get();
+        },
         accessors: {
           get: function (path) {
             return tree.get(path);
