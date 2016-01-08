@@ -24,7 +24,7 @@
     "url": "https://github.com/christianalfoni/cerebral-baobab/issues"
   },
   "homepage": "https://github.com/christianalfoni/cerebral-baobab#readme",
-  "peerDependencies": {
+  "dependencies": {
     "baobab": "^2.3.0"
   }
 }
