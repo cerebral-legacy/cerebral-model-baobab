@@ -66,6 +66,9 @@ var Model = function (initialState, options) {
           toJSON: function () {
             return tree.toJSON();
           },
+          toJS: function (path) {
+            return tree.get(path);
+          },
           serialize: function (path) {
             return tree.serialize(path);
           },
