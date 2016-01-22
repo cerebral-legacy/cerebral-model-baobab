@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/christianalfoni/cerebral-baobab#readme",
   "dependencies": {
-    "baobab": "^2.3.0"
+    "baobab": "^2.3.3"
   }
 }
