@@ -21,9 +21,9 @@
   "author": "Christian Alfoni",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/christianalfoni/cerebral-baobab/issues"
+    "url": "https://github.com/cerebral/cerebral-model-baobab/issues"
   },
-  "homepage": "https://github.com/christianalfoni/cerebral-baobab#readme",
+  "homepage": "https://github.com/cerebral/cerebral-model-baobab#readme",
   "dependencies": {
     "baobab": "^2.3.3"
   }
