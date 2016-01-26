@@ -1,14 +1,15 @@
 {
   "name": "cerebral-model-baobab",
-  "version": "0.4.6",
+  "version": "0.0.0-semantically-released",
   "description": "Baobab Model layer for Cerebral",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "true",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/christianalfoni/cerebral-baobab.git"
+    "url": "https://github.com/cerebral/cerebral-model-baobab.git"
   },
   "keywords": [
     "cerebral",
@@ -24,7 +25,25 @@
     "url": "https://github.com/cerebral/cerebral-model-baobab/issues"
   },
   "homepage": "https://github.com/cerebral/cerebral-model-baobab#readme",
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "release": {
+    "analyzeCommits": "./sr-prerelease.js"
+  },
   "dependencies": {
     "baobab": "^2.3.3"
+  },
+  "devDependencies": {
+    "commitizen": "^2.5.0",
+    "cz-customizable": "^2.7.1",
+    "ghooks": "^1.0.3",
+    "validate-commit-msg": "^1.1.1",
+    "semantic-release": "^4.3.5"
   }
 }
