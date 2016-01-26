@@ -120,18 +120,22 @@ var Model = function (initialState, options) {
             });
           },
           pop: function (path) {
+            var val;
             tree.apply(path, function (existingValue) {
               var copy = existingValue.slice();
-              copy.pop();
+              val = copy.pop();
               return copy;
             });
+            return val;
           },
           shift: function (path) {
+            var val;
             tree.apply(path, function (existingValue) {
               var copy = existingValue.slice();
-              copy.shift();
+              val = copy.shift();
               return copy;
             });
+            return val;
           },
           unshift: function (path, value) {
             tree.unshift(path, value);
