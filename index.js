@@ -1,3 +1,5 @@
+var setWhere = require('./src/set-where');
+
 var Baobab = require('baobab');
 function deepmerge(target, src) {
    var array = Array.isArray(src);
@@ -139,6 +141,10 @@ var Model = function (initialState, options) {
           },
           unshift: function (path, value) {
             tree.unshift(path, value);
+          },
+          setWhere: function () {
+            var args = [].slice.call(arguments);
+            return setWhere.apply(null, [tree].concat(args));
           }
         }
     };
