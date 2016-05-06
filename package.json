@@ -4,7 +4,7 @@
   "description": "Baobab Model layer for Cerebral",
   "main": "index.js",
   "scripts": {
-    "test": "true",
+    "test": "nodeunit",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
