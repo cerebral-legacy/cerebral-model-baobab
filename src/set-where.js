@@ -1,6 +1,7 @@
-var assign  = require('lodash.assign');
-var isEmpty = require('lodash.isempty');
-var isArray = require('lodash.isarray');
+var assign     = require('lodash.assign');
+var isEmpty    = require('lodash.isempty');
+var isArray    = require('lodash.isarray');
+var isFunction = require('lodash.isfunction');
 
 module.exports = function() {
   var tree     = arguments[0];
@@ -17,19 +18,29 @@ module.exports = function() {
 }
 
 function setObject(cursor, query, newAttrs) {
+  if (isFunction(query)) throw new Error("Data at the path: '" + cursor.path +
+    "' can't be queried by a function.\n Please use an object to query by properties." +
+    " Example:\n setWhere('todo', {completed: true}, {title: 'bam'}).");
+
   Object.keys(query).forEach(function(queryKey) {
-    if (!(queryKey in cursor.get())) throw new Error(`No key: ${queryKey} in object.`);
+    if (!(queryKey in cursor.get())) throw new Error('No key: ' + queryKey + ' in object.');
   });
 
-  !newAttrs ? cursor.set(null) : cursor.merge(newAttrs);
+  var objectFound = Object.keys(query).reduce(function(bool, queryKey) {
+    return bool && (cursor.get()[queryKey] === query[queryKey]);
+  }, true);
+
+  if (objectFound) !newAttrs ? cursor.set(null) : cursor.merge(newAttrs);
 }
 
 function setCollection(collection, query, newAttrs) {
-  var items = collection.get().filter(function(item) {
-    return Object.keys(query).reduce((bool, queryKey) => {
+  var filterFn = isFunction(query) ? query : function(item) {
+    return Object.keys(query).reduce(function(bool, queryKey) {
       return bool && (item[queryKey] === query[queryKey]);
     }, true);
-  });
+  };
+
+  var items = collection.get().filter(filterFn);
 
   if (isEmpty(items)) return collection.push(newAttrs);
 
