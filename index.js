@@ -42,7 +42,30 @@ var Model = function (initialState, options) {
 
   var tree = new Baobab(initialState, options);
 
+  function update(changes, path) {
+    path.reduce(function (changes, key, index) {
+      if (index === path.length - 1 && !changes[key]) {
+        changes[key] = true
+      } else if (changes[key] === true) {
+        changes[key] = {}
+      } else if (!changes[key]) {
+        changes[key] = {}
+      }
+
+      return changes[key];
+    }, changes);
+    return changes;
+  }
+
   var model = function (controller) {
+
+    controller.on('change', function () {
+      tree.once('update', function (event) {
+        var changes = event.data.paths.reduce(update, {})
+        controller.emit('flush', changes);
+      });
+      tree.commit();
+    });
 
     controller.on('reset', function () {
       tree.set(initialState);
