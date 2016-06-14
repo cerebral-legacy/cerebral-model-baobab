@@ -4,7 +4,7 @@
   "description": "Baobab Model layer for Cerebral",
   "main": "index.js",
   "scripts": {
-    "test": "true",
+    "test": "nodeunit",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -37,14 +37,19 @@
     "analyzeCommits": "./sr-prerelease.js"
   },
   "dependencies": {
-    "baobab": "^2.3.3"
+    "baobab": "^2.3.3",
+    "lodash.assign": "^4.0.8",
+    "lodash.isarray": "^4.0.0",
+    "lodash.isempty": "^4.2.1",
+    "lodash.isfunction": "^3.0.8"
   },
   "devDependencies": {
     "commitizen": "^2.5.0",
-    "cz-customizable": "^2.7.1",
     "conventional-changelog": "0.0.17",
+    "cz-customizable": "^2.7.1",
     "ghooks": "^1.0.3",
-    "validate-commit-msg": "^1.1.1",
-    "semantic-release": "^4.3.5"
+    "nodeunit": "^0.9.1",
+    "semantic-release": "^4.3.5",
+    "validate-commit-msg": "^1.1.1"
   }
 }
